@@ -1,0 +1,10 @@
+http_path = "/"
+css_dir = "css"
+sass_dir = "scss"
+images_dir = "assets"
+javascripts_dir = "scripts"
+output_style = :compressed
+relative_assets = true
+line_comments = false
+# generated_images_path = "/images"
+# http_images_dir = "img"
