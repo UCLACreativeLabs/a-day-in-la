@@ -7,4 +7,19 @@
 body {
   width: 100%;
   height: 100%;
+
+  div.svg-wrapper {
+    margin: 0 auto;
+    width: 800px;
+    height: 600px;
+    display: block;
+    overflow: hidden;
+    svg.main {
+      transition: transform 300ms ease-in-out;
+      -moz-transition: transform 300ms ease-in-out;
+      // margin: 0 auto;
+      // display: block;
+      // margin-top: 50px;
+    }
+  }
 }
