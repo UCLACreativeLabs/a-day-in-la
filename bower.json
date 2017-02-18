@@ -1,0 +1,21 @@
+{
+  "name": "a-day-in-la",
+  "homepage": "https://github.com/UCLACreativeLabs/a-day-in-la",
+  "authors": [
+    "Chang Liu <shampliu@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "snap-svg": "*",
+    "Snap.svg": "snap.svg#^0.5.1"
+  }
+}
