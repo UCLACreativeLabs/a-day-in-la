@@ -1,10 +1,11 @@
-var s = Snap("#santamonica");
+let s = Snap("#santamonica");
 
-var w = window.innerWidth;
-var h = window.innerHeight;
-var mid = { x: Math.round(w/2), y: Math.round(h/2) };
-var pad = 1;
-var scale = 1.2;
+const w = window.innerWidth;
+const h = window.innerHeight;
+const mid = { x: Math.round(w/2), y: Math.round(h/2) };
+const pad = 1;
+const scale = 1;
+const parallax_factor = 0.4;
 
 
 var santamonica = Snap.load("assets/scene1.svg", function ( loadedFragment ) {
@@ -15,30 +16,30 @@ var santamonica = Snap.load("assets/scene1.svg", function ( loadedFragment ) {
   svg.style.height = h + 'px';
   svg.style.transformOrigin = '50% 50%';
 
+  let bg = svg.getElementById('back');
+  let mg = svg.getElementById('mid');
+  let fg = svg.getElementById('front');
+
   window.addEventListener('mousemove', function(e) {
     let dx = e.pageX - mid.x;
     let dy = e.pageY - mid.y;
 
     let newX = -1 * Math.min((w / 10) * (dx / mid.x) * pad, w/10);
-    let newY = -1 * Math.min((h / 10) * (dy / mid.y) * pad, h/10);
+    let newY = -1 * Math.min((h / 20) * (dy / mid.y) * pad, h/20);
+
+    [fg, mg, bg].forEach(function(layer) {
+      layer.style.transform = `matrix(${scale}, 0, 0, ${scale}, ${newX}, ${newY})`;
+      newX *= parallax_factor;
+      newY *= parallax_factor;
+    })
+
+    // let newX = -1 * Math.min((w / 10) * (dx / mid.x) * pad, w/10);
+    // let newY = -1 * Math.min((h / 20) * (dy / mid.y) * pad, h/20);
 
     // svg.style.transform = "translate(" + percX + "%," + percY + "%)";
-    svg.style.transform = `matrix(${scale}, 0, 0, ${scale}, ${newX}, ${newY})`
+    // svg.style.transform = `matrix(${scale}, 0, 0, ${scale}, ${newX}, ${newY})`
 
 
-
-
-    // if (e.pageX < (mid.x - pad)) {
-    //   console.log('translating');
-    //   let currX = 0;
-    //   currX = -100;
-    //   let currY = -100;
-    //   (function(currX) {
-    //     svg.style.transform = "translate(" + currX + "px," + currY + "px)";
-    //
-    //   })(currX, currY);
-    //
-    // }
 
   });
 
