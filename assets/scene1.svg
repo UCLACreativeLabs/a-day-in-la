@@ -676,8 +676,8 @@
 		<circle class="st7" cx="1128" cy="178.1" r="76.4"/>
 		<circle class="st7" cx="1128" cy="178.3" r="67"/>
 		<circle class="st7" cx="1130" cy="178.3" r="10.7"/>
-		<polyline class="st7" points="1163.1,312.2 1130,197.6 1095.6,313 		"/>
 	</g>
+	<polyline class="st7" points="1163.1,312.2 1130,197.6 1095.6,313 		"/>
 	<rect x="1064" y="310.2" class="st4" width="132" height="15.4"/>
 	<g>
 		<path class="st13" d="M1185.1,175.5c0,7.1,5.7,12.8,12.8,12.8s12.8-5.7,12.8-12.8H1185.1z"/>
