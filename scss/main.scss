@@ -24,18 +24,18 @@ body {
 }
 
 svg * {
-	transform-origin: center;
+	@include prefix(transform-origin, center);
 }
 
 
 #ferriswheel {
-	transform-origin: center;
-	transition: 10s ease-in-out all;
+	@include prefix(transform-origin, center);
+	@include prefix(transition, all 10s ease-in-out);
 }
 
 #ferriswheel g{
-	transform-origin: center;
-	transition: 10s ease-in-out all;
+	@include prefix(transform-origin, center);
+	@include prefix(transition, 10s ease-in-out all);
 }
 
 // $elements: 15;
