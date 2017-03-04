@@ -15,7 +15,6 @@
     "tests"
   ],
   "dependencies": {
-    "snap-svg": "*",
     "Snap.svg": "snap.svg#^0.5.1"
   }
 }
