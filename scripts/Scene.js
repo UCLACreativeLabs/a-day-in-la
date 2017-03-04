@@ -14,9 +14,8 @@ function Scene() {
   svg.style.transformOrigin = '50% 50%';
 
   this.loadScene = function(path) {
-    let _this = this;
     Snap.load(path, function ( loadedFragment ) {
-      _this.scene.append( loadedFragment );
+      this.scene.append( loadedFragment );
 
       let bg = svg.getElementById('back');
       let mg = svg.getElementById('mid');
@@ -27,7 +26,7 @@ function Scene() {
         let dy = e.pageY - MID.y;
 
         let newX = -1 * Math.min((WIDTH / 10) * (dx / MID.x) * PAD, WIDTH/10);
-        let newY = -1 * Math.min((HEIGHT / 20) * (dy / MID.y) * PAD, HEIGHT/20);
+        let newY = 0 * Math.min((HEIGHT / 20) * (dy / MID.y) * PAD, HEIGHT/20);
 
         [fg, mg, bg].forEach(function(layer) {
           layer.style.transform = `matrix(${SCALE}, 0, 0, ${SCALE}, ${newX}, ${newY})`;
@@ -35,7 +34,7 @@ function Scene() {
           newY *= PARALLAX_FACTOR;
         })
       });
-    });
+    }.bind(this));
   }
 
 
