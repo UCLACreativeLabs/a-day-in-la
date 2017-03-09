@@ -17,9 +17,9 @@
 	// returns a matrix that transform points from src's coordinate system
 	// to dest's coordinate system
 	function transformBetween(src, dest) {
-		var srcTransform = src.transform().globalMatrix.invert();
-		var destTransform = dest.transform().globalMatrix.invert();
-		return srcTransform.invert().multLeft(destTransform);
+		var srcTransform = src.transform().globalMatrix;
+		var destTransform = dest.transform().globalMatrix;
+		return srcTransform.multLeft(destTransform.invert());
 	}
 
 	// modified from http://michaeltempest.com/the-missing-snap-svg-function/
@@ -29,7 +29,7 @@
 			mat = transformBetween(path, el);
 
 		Snap.animate(start, len, function(value) {
-			var pt = Snap.path.getPointAtLength(path, value);
+			var pt = path.getPointAtLength(value);
 			el.transform('t' + (mat.x(pt.x,pt.y) - elBB.cx) + ',' + (mat.y(pt.x,pt.y) - elBB.cy));
 		}, duration, easing, function() {
 			if (callback) callback(path);
