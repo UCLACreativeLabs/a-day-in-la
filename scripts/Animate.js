@@ -17,6 +17,6 @@ function AnimationController() {
 			    svgJson[element].animation(docElement);
 			  });
 			}
-		}, 100);
+		}, 1000);
 	};
 }
