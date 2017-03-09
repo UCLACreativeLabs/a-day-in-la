@@ -23,17 +23,27 @@
 	}
 
 	// modified from http://michaeltempest.com/the-missing-snap-svg-function/
-	function animateAlongPath(path, el, start, duration, easing, callback) {
+	// "milestones" are control points to control speed along the path. The time between each milestone is constant, so put milestones close together on sections you want the object to move slowly
+	// milestones: array of points along the path (in absolute distance)
+	// duration: the time it should take to get to the next milestone
+	function animateAlongPath(path, el, start, duration, milestones, easing, callback) {
 		var len = Snap.path.getTotalLength(path),
 			elBB = el.getBBox(),
-			mat = transformBetween(path, el);
+			mat = transformBetween(path, el),
+			milestones = milestones.slice(); // copy the array
 
-		Snap.animate(start, len, function(value) {
-			var pt = path.getPointAtLength(value);
-			el.transform('t' + (mat.x(pt.x,pt.y) - elBB.cx) + ',' + (mat.y(pt.x,pt.y) - elBB.cy));
-		}, duration, easing, function() {
-			if (callback) callback(path);
-		});
+		milestones.push(len); // add the path end point as a final milestone
+
+		(function startFrame(currFrame, prevEnd) {
+			var nextEnd = milestones[currFrame];
+			Snap.animate(prevEnd, nextEnd, function(value) {
+				var pt = path.getPointAtLength(value);
+				el.transform('t' + (mat.x(pt.x,pt.y) - elBB.cx) + ',' + (mat.y(pt.x,pt.y) - elBB.cy));
+			}, duration, easing, function() {
+				if (currFrame < milestones.length) startFrame(currFrame+1, nextEnd);
+				else if (callback) callback(path);
+			});
+		})(0, start);
 	};
 
 	var s = Snap('#svg');
@@ -41,7 +51,8 @@
 	Snap.load('testpath.svg', (imported) => {
 		s.append(imported);
 		var p = Snap('#path4146');
-		animateAlongPath(p, circle, 0, 5000);
+		console.log(p.getTotalLength());
+		animateAlongPath(p, circle, 0, 1000, [50,200]);
 	});
 	</script>
 </body>
