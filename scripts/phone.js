@@ -12,7 +12,7 @@ var nextSceneHash = {
 		"parallax" : true
 	},
 	'assets/HollywoodScene.svg' : {
-		"name" : "",
+		"name" : "Hollywood",
 		"parallax" : false
 	},
 	'assets/bar.svg' : {
