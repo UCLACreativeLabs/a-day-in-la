@@ -21,6 +21,10 @@ function Scene() {
       let mg = svg.getElementById('mid');
       let fg = svg.getElementById('front');
 
+      if(!bg || !mg || !fg) {
+        return;
+      }
+
       window.addEventListener('mousemove', function(e) {
         let dx = e.pageX - MID.x;
         let dy = e.pageY - MID.y;
