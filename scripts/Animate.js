@@ -8,9 +8,7 @@ function AnimationController() {
 			  var docElement = document.getElementById(element);
 
 			  if(svgJson[element].trigger == "default") {
-			    window.setTimeout(function(){
-			      svgJson[element].animation(docElement);
-			    }, 100);
+			    svgJson[element].animation(docElement);
 			  }
 
 			  item.addEventListener(svgJson[element].trigger, function(){
