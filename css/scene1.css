@@ -1,0 +1,64 @@
+#ferriswheel{-webkit-transform-origin:center;moz-transform-origin:center;-ms-transform-origin:center;-o-transform-origin:center;transform-origin:center;-webkit-transition:all 10s ease-in-out;-moz-transition:all 10s ease-in-out;-ms-transition:all 10s ease-in-out;-o-transition:all 10s ease-in-out;transition:all 10s ease-in-out}#ferriswheel g{-webkit-transform-origin:center;-moz-transform-origin:center;-ms-transform-origin:center;-o-transform-origin:center;transform-origin:center;-webkit-transition:10s ease-in-out all;-moz-transition:10s ease-in-out all;-ms-transition:10s ease-in-out all;-o-transition:10s ease-in-out all;transition:10s ease-in-out all}
+
+#cityscape1, #cityscape2 {
+	animation-name: buildingsMove;
+    animation-duration: 5s;
+    animation-iteration-count: 4;
+}
+
+#sky {
+	animation-name: skyMove;
+    animation-duration: 20s;
+    animation-iteration-count: 1;
+
+}
+
+#sun {
+	animation-name: sunMove;
+    animation-duration: 20s;
+    animation-iteration-count: 1;
+
+}
+
+@keyframes buildingsMove{
+  0% { transform: translate(0px, 0px) }
+  50% { transform: translate(900px, 0px) }
+  52% { transform: translate(895px, 0px) }
+  54% { transform: translate(900px, 0px) }
+  60% { transform: translate(900px, 0px) }
+  96% { transform: translate(2620px, 0px) }
+  98% { transform: translate(2619px, 0px) }
+  100% { transform: translate(2620px, 0px) }
+}
+
+@keyframes skyMove{
+  0% { transform: translate(0px, 0px) }
+  12.5% { transform: translate(150px, 0px) }
+  15% { transform: translate(150px, 0px) }
+  25% { transform: translate(400px, 0px) }
+  37.5% { transform: translate(550px, 0px) }
+  40% { transform: translate(550px, 0px) }
+  50% { transform: translate(800px, 0px) }
+  62.5% { transform: translate(950px, 0px) }
+  65% { transform: translate(950px, 0px) }
+  75% { transform: translate(1200px, 0px) }
+  87.5% { transform: translate(1250px, 0px) }
+  90%	{ transform: translate(1250px, 0px) }
+  100% { transform: translate(1600px, 0px) }
+}
+
+@keyframes sunMove{
+  0% { transform: translate(0px, 0px) }
+  12.5% { transform: translate(30px, 0px) }
+  15% { transform: translate(30px, 0px) }
+  25% { transform: translate(80px, 0px) }
+  37.5% { transform: translate(110px, 0px) }
+  40% { transform: translate(110px, 0px) }
+  50% { transform: translate(160px, 0px) }
+  62.5% { transform: translate(190px, 0px) }
+  65% { transform: translate(190px, 0px) }
+  75% { transform: translate(240px, 0px) }
+  87.5% { transform: translate(250px, 0px) }
+  90%	{ transform: translate(250px, 0px) }
+  100% { transform: translate(320px, 0px) }
+}

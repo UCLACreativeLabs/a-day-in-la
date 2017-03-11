@@ -6,7 +6,7 @@ function AnimationController() {
 			  var item = document.getElementById(element);
 
 			  var docElement = document.getElementById(element);
-
+			  console.log(docElement);
 			  if(svgJson[element].trigger == "default") {
 			      svgJson[element].animation(docElement);
 			  }

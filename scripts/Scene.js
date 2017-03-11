@@ -86,6 +86,9 @@ function Scene() {
       let mg = svg.getElementById('mid');
       let fg = svg.getElementById('front');
 
+      if(!fg || !bg || !mg) {
+        return;
+      }
       window.addEventListener('mousemove', function(e) {
         if (parallax) {
           let dx = e.pageX - MID.x;
