@@ -1,25 +1,29 @@
 let scene1 = new Scene();
-scene1.loadScene('assets/scene1.svg');
+scene1.loadScene('assets/lyftScene.svg');
 
 var animationsList = {
-  ferriswheel: {
+    sky: {
     trigger: "default",
-    animation: ferrisAnimation,
-  }
-}
+    animation: skyAnimation,
+  },
+
+  cityscape1: {
+    trigger: "default",
+    animation: cityscapeAnimation,
+  },
+};
 
 // mouseover, click, default
 var animationController = new AnimationController();
 animationController.Animate(animationsList);
 
 //define CustomAnimations here
-function ferrisAnimation(elem) {
+function skyAnimation(elem) {
   elem.style.transition = '10s ease all';
-  elem.style.transform = 'rotate(360deg)';
-  var nodes = elem.childNodes;
-  for(var i=0; i<nodes.length; i++) {
-      if (nodes[i].nodeName.toLowerCase() == 'g') {
-          nodes[i].style.transform = 'rotate(-360deg)';
-       }
-  }
+  elem.style.transform = 'translate(50vh)';
+}
+
+function cityscapeAnimation(elem) {
+  elem.style.transition = '10s ease all';
+  elem.style.transform = 'translate(100vh)';
 }
