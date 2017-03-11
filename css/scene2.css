@@ -1,32 +1,133 @@
-html, body {
-	margin: 0;	
-	padding: 0;
+
+#Van {
+	transform: translateX(100vh);
 }
 
-body {
-	background: #171717;
-	color: #999;
-	font: 100%/18px helvetica, arial, sans-serif;
+#car1 {
+	transform: translateX(150vh);
+	animation: carMoveForward 10s linear infinite
+
 }
 
-a {
-	color: #2fa1d6;
-	font-weight: bold;
-	text-decoration: none;
+#Van {
+	transform: translateX(150vh);
+	animation: carMoveForward 25s linear infinite
 }
 
-a:hover {
-	color: #fff;	
+#car2 {
+	transform: translateX(150vh);
+	animation: carMoveForward 15s linear infinite
 }
 
-#canvas-container {
-	background: #000 url(http://jackrugile.com/lab/fireworks-v2/images/bg.jpg);
-  height: 400px;
-	left: 50%;
-	margin: -200px 0 0 -300px;
+
+#impersonator {
 	position: absolute;
-	top: 50%;
-  width: 600px;
-	z-index: 2;
+	animation: supermanFloat 3s ease infinite;
 }
-		
+
+#Flash {
+	animation: cameraShot 1s linear infinite
+}
+
+#famousStar {
+	animation: starRotation 2s linear infinite
+}
+
+#midHolly {
+	opacity: 0;
+}
+#leftHolly {
+	opacity: 0;
+}
+
+
+#light1 {
+/*	transform: scaleY(5);
+
+*/	
+/*	height: 300%;
+*/	transform-origin: 100% 100%;
+	animation: light1Rotation 2s linear infinite alternate
+}
+
+#light2 {
+	transform-origin: 45% 100%;;
+	animation: light2Rotation 2s linear infinite alternate
+}
+#light3 {
+	transform-origin: 100% 100%;;
+	animation: light1Rotation 2s linear infinite alternate
+}#light4 {
+	transform-origin: 100% 100%;;
+	animation: light1Rotation 2s linear infinite alternate
+}#light5 {
+	transform-origin: 100% 100%;;
+	animation: light1Rotation 2s linear infinite alternate
+}
+
+
+@keyframes light1Rotation {
+	0% {transform: rotate(-45deg) ;}
+	50% {transform: rotate(0deg);}
+	100% {transform: rotate(45deg);}
+}
+
+@keyframes light2Rotation {
+	0% {transform: rotate(45deg);}
+	50% {transform: rotate(0deg);}
+	100% {transform: rotate(-45deg);}
+}
+
+@keyframes carMoveForward {
+	0% {transform: translateX(2000px);}
+	100% {transform: translateX(-5000px);}
+}
+
+@keyframes starRotation {
+	0% {transform: rotate(0deg);}
+	50% {transform: rotate(180deg);}
+	100% {transform: rotate(0deg);}
+}
+
+@keyframes supermanFloat {
+	0% {transform: translateY(0px);}
+	50% {transform: translateY(100px);}
+	100% {transform: translateY(0px);}
+}
+
+@-webkit-keyframes myfirst {
+    0%   {left:0px; top:0px;}
+    25%  {left:200px; xtop:0px;}
+    50%  {left:200px; top:200px;}
+    75%  {left:0px; top:200px;}
+    100% {left:0px; top:0px;}
+}
+
+@keyframes moveForward {
+  0% { left:0px; }
+  100% { left:500px; }
+}
+
+@keyframes cameraShot {
+  0% { opacity: 0; }
+  10% { opacity: 0; }
+  15% { opacity: 1; }
+  30% { opacity: 0; }
+  60% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes hideshow {
+  0% { opacity: 1; }
+  10% { opacity: 1; }
+  15% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes mymove {
+    0%   {top: 0px; left: 0px;}
+    25%  {top: 0px; left: 100px;}
+    50%  {top: 100px; left: 100px;}
+    75%  {top: 100px; left: 0px;}
+    100% {top: 0px; left: 0px;}
+}
