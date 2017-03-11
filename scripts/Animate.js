@@ -6,17 +6,18 @@ function AnimationController() {
 			  var item = document.getElementById(element);
 
 			  var docElement = document.getElementById(element);
-
+			  console.log(docElement);
 			  if(svgJson[element].trigger == "default") {
-			    window.setTimeout(function(){
-			      svgJson[element].animation(docElement);
-			    }, 100);
+			  	svgJson[element].animation(docElement);
+			    // window.setTimeout(function(){
+			      
+			    // }, 100);
 			  }
 
 			  item.addEventListener(svgJson[element].trigger, function(){
 			    svgJson[element].animation(docElement);
 			  });
 			}
-		}, 100);
+		}, 1000);
 	};
 }
