@@ -6,12 +6,56 @@ var HB = phoneCont.getElementById('Hollywood_2_');
 var CF = phoneCont.getElementById('Cafe_2_');
 var BAR = phoneCont.getElementById('Bar_2_');
 
+var nextSceneHash = {
+	'assets/cafe.svg' : {
+		"name" : "",
+		"parallax" : false
+	},
+	'assets/HollywoodScene.svg' : {
+		"name" : "",
+		"parallax" : false
+	},
+	'assets/bar.svg' : {
+		"name" : "",
+		"parallax" : false
+	},
+	'assets/SantaMonica.svg' : {
+		"name" : "SantaMonica",
+		"parallax": true
+	}
+}
 
 var nextTrans;
 var nextScene;
 var curScene = 'LYFT';
 
 phoneCont.addEventListener('click', expandPhone);
+
+function loadjscssfile(filename, filetype){
+  if (filetype=="js"){ //if filename is a external JavaScript file
+    var fileref=document.createElement('script')
+    fileref.setAttribute("type","text/javascript")
+    fileref.setAttribute("src", filename)
+  }
+  else if (filetype=="css"){ //if filename is an external CSS file
+    var fileref=document.createElement("link")
+    fileref.setAttribute("rel", "stylesheet")
+    fileref.setAttribute("type", "text/css")
+    fileref.setAttribute("href", filename)
+  }
+  if (typeof fileref!="undefined")
+    document.getElementsByTagName("head")[0].appendChild(fileref)
+}
+
+function removejscssfile(filename, filetype){
+	var targetelement=(filetype=="js")? "script" : (filetype=="css")? "link" : "none" //determine element type to create nodelist from
+	var targetattr=(filetype=="js")? "src" : (filetype=="css")? "href" : "none" //determine corresponding attribute to test for
+	var allsuspects=document.getElementsByTagName(targetelement)
+	for (var i=allsuspects.length; i>=0; i--){ //search backwards within nodelist for matching elements to remove
+		if (allsuspects[i] && allsuspects[i].getAttribute(targetattr)!=null && allsuspects[i].getAttribute(targetattr).indexOf(filename)!=-1)
+		allsuspects[i].parentNode.removeChild(allsuspects[i]) //remove element by calling parentNode.removeChild()
+	}
+}
 
 function clickEventCF(e){
 	e.stopPropagation();
@@ -70,7 +114,7 @@ function clickEventSM(e){
 	e.stopPropagation();
 	shrinkPhone();
 	nextTrans = 'assets/waves.svg';
-	nextScene = 'assets/scene1.svg';
+	nextScene = 'assets/SantaMonica.svg';
 	if (curScene == SM)
 		return;
 	else if (curScene == HB){
@@ -123,20 +167,30 @@ function clickEventBAR(e){
 	curScene = BAR;
 }
 function transitionTo(scenePath){ //doesnt handle trans svg, handled in animation func
-	console.log(scenePath);
+	let oldScripts = Array.prototype.slice.apply(document.querySelectorAll('script')).filter(s => (s.src != undefined && s.src.search('scenes') > -1))
+	if (oldScripts.length > 0) { oldScripts.forEach(s => s.parentNode.removeChild(s)); }
+
+	let oldStyles = Array.prototype.slice.apply(document.querySelectorAll('link')).filter(s => (s.href != undefined && s.href.search('scenes') > -1))
+	if (oldStyles.length > 0) { oldStyles.forEach(l => l.parentNode.removeChild(l)); }
+
 	let cont = scene1.scene.node;
-		let curScene = cont.getElementsByTagName('svg')[0]; //the only svg element in #scene should be the current svg
-		let curTrans = document.getElementById('transition');
-		console.log(curScene);
-		cont.removeChild(curScene);
-		scene1.loadScene(scenePath);
+	let curScene = cont.getElementsByTagName('svg')[0]; //the only svg element in #scene should be the current svg
+	let curTrans = document.getElementById('transition');
+	console.log(curScene);
+	cont.removeChild(curScene);
+	let sceneInfo = nextSceneHash[nextScene];
+
+	scene1.loadScene(scenePath, sceneInfo.parallax);
+	loadjscssfile("/css/scenes/" + sceneInfo.name + ".css", "css");
+	loadjscssfile("/scripts/scenes/" + sceneInfo.name + ".js", "js");
 }
 
 function shrinkPhone(){
 	phoneCont.classList.remove('expanded');
 	phoneCont.classList.add('shrunk');
 	main.removeEventListener('click', shrinkPhone);
-	
+
+	SM.removeEventListener('click', clickEventSM);
 	CF.removeEventListener('click', clickEventCF);
 	HB.removeEventListener('click', clickEventHB);
 	BAR.removeEventListener('click', clickEventBAR);
@@ -151,5 +205,4 @@ function expandPhone(){
 	CF.addEventListener('click', clickEventCF);
 	HB.addEventListener('click', clickEventHB);
 	BAR.addEventListener('click', clickEventBAR);
-
 }
