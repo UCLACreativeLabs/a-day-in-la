@@ -24,6 +24,11 @@
 			milestones = [],
 			animObj = {};
 
+		testInterpolate = makeTravelInterpolator([1,10,50]);
+		for (var i = 0; i < 1; i+=0.1) {
+			console.log(testInterpolate(i));
+		}
+
 		function reanimate() {
 			animObj.anim && animObj.anim.stop();
 			circle.transform(''); // initial transformation should be 0
