@@ -24,7 +24,7 @@
 			milestones = [],
 			animObj = {};
 
-		testInterpolate = makeTravelInterpolator([1,10,50]);
+		testInterpolate = createTravelLengthInterpolator([1,10,50]);
 		for (var i = 0; i < 1; i+=0.1) {
 			console.log(testInterpolate(i));
 		}
@@ -39,7 +39,7 @@
 			var elem = s.circle(x, y, 5);
 
 			milestones.push(length);
-			milestones.sort();
+			milestones.sort((a,b) => a-b);
 			elem.appendTo(s);
 			elem.click((e) => {
 				milestones.splice(milestones.indexOf(length), 1);
