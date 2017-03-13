@@ -1,3 +1,8 @@
+// this file turns every path you call animateAlongPath() on into an interactive path,
+// where you can click along the path to create milestones and see how the behavior changes.
+// Every time the array of milestones changes the array is printed to console, so it can
+// be copied and hard-coded in.
+
 var oldAnimateAlongPathFn = animateAlongPath;
 animateAlongPath = function(path, el, start, duration, milestones, easing, callback) {
 	var anim = null,
