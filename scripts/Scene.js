@@ -13,6 +13,12 @@ function Scene() {
   svg.style.height = HEIGHT + 'px';
   svg.style.transformOrigin = '50% 50%';
 
+  this.loadTrans = function(path){
+    Snap.load(path, function (loadedFragment){
+      document.body.appendChild(loadedFragment.node);
+    }.bind(this));
+  }
+
   this.loadScene = function(path) {
     Snap.load(path, function ( loadedFragment ) {
       this.scene.append( loadedFragment );
@@ -36,7 +42,5 @@ function Scene() {
       });
     }.bind(this));
   }
-
-
 
 }

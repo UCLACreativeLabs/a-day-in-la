@@ -33,6 +33,7 @@ function init() {
             cy: evt.clientY
         });
     };
+    
     document.getElementById("scene").onmousedown = function() {
       cursor.animate({
         opacity: 0,

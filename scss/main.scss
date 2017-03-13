@@ -26,3 +26,53 @@ body {
 svg * {
 	@include prefix(transform-origin, center);
 }
+
+.phoneCont{
+  position: fixed;
+  z-index: 50000;
+  transition: all .25s ease-out; 
+}
+
+.shrunk{
+  height: 20vh;
+  bottom: 5vh;
+  left: 5vh;
+}
+
+.shrunk:hover{
+  height: 22vh;
+}
+
+.expanded{
+  height: 100vh;
+  bottom: 50vh;
+  left: 50vw;
+  transform: translate(-50%, 50%);
+}
+
+.wave{
+  transform: translateY(200vh);
+  transition: all .5s ease-in-out;
+}
+
+#transition{
+  position: fixed;
+  display: none; //remember to enable display when transition displays, then hide it again (doesn't interfere with scene clicks)
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 2000;
+  max-width: 120vw;
+  max-height: 120vh;
+}
+
+
+.rotate{
+  animation: rotate 5s infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes rotate{
+  0%{transform: rotate(180deg) translate(100vw, 0);}
+  100%{transform: rotate(-180deg) translate(-10vw, 0);}
+}
