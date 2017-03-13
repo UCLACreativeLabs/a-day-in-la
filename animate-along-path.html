@@ -22,7 +22,7 @@
 		s.append(imported);
 		var p = Snap('#path4146'),
 			milestones = [],
-			animObj = {};
+			anim = null;
 
 		testInterpolate = createTravelLengthInterpolator([1,10,50]);
 		for (var i = 0; i < 1; i+=0.1) {
@@ -30,17 +30,18 @@
 		}
 
 		function reanimate() {
-			animObj.anim && animObj.anim.stop();
+			anim && anim.stop();
 			circle.transform(''); // initial transformation should be 0
-			animateAlongPath(p, circle, 0, 500, milestones, animObj);
+			anim = animateAlongPath(p, circle, 0, 500, milestones);
 		}
 
-		function createMilestone(x, y, length) {
-			var elem = s.circle(x, y, 5);
+		function createMilestone(path, length) {
+			var pt = path.getPointAtLength(length),
+				elem = path.parent().circle(pt.x, pt.y, 5);
 
 			milestones.push(length);
 			milestones.sort((a,b) => a-b);
-			elem.appendTo(s);
+			elem.insertAfter(path);
 			elem.click((e) => {
 				milestones.splice(milestones.indexOf(length), 1);
 				elem.remove();
@@ -52,15 +53,13 @@
 		}
 
 		$("#svg").click(function (e) {
-			var mat = p.transform().globalMatrix,
-				matinv = mat.invert(),
-				offset = [e.offsetX, e.offsetY],
-				offsetRel = [matinv.x(...offset), matinv.y(...offset)];
+			var matinv = p.transform().globalMatrix.invert(),
+				x = e.offsetX,
+				y = e.offsetY;
 
-			closest = Snap.closestPoint(p, ...offsetRel);
+			closest = Snap.closestPoint(p, matinv.x(x,y), matinv.y(x,y));
 			if (closest.distance < 5) {
-				var pt = [closest.x, closest.y]
-				createMilestone(mat.x(...pt), mat.y(...pt), closest.length);
+				createMilestone(p, closest.length);
 			}
 
 			console.log(closest);

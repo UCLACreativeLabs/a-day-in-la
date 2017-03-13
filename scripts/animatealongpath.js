@@ -33,19 +33,20 @@ function createTravelLengthInterpolator(milestones) {
 // milestones: array of points along the path (in absolute distance)
 // duration: the TOTAL duraction of the animation. Thus, each milestone
 //           takes (duration/milestones.length) amount of time
-function animateAlongPath(path, el, start, duration, milestones, animObj, easing, callback) {
+// returns: whatever Snap.animate() returns
+function animateAlongPath(path, el, start, duration, milestones, easing, callback) {
 	var len = Snap.path.getTotalLength(path),
 		elBB = el.getBBox(),
-		mat = transformBetween(path, el),
 		milestones = milestones.concat([len]); // copy the array
 
+	el.insertAfter(path); // move next to path, so don't need to worry about transformations
 	milestones.push(len); // add the path end point as a final milestone
 
 	var getLength = createTravelLengthInterpolator(milestones);
 
-	animObj.anim = Snap.animate(0, 1, function(value) {
+	return Snap.animate(0, 1, function(value) {
 		var pt = path.getPointAtLength(getLength(value));
-		el.transform('t' + (mat.x(pt.x,pt.y) - elBB.cx) + ',' + (mat.y(pt.x,pt.y) - elBB.cy));
+		el.transform('t' + (pt.x - elBB.cx) + ',' + (pt.y - elBB.cy));
 		//console.log(el.transform().string)
 	}, duration, easing, function() {
 		if (callback) callback(path);
