@@ -15,14 +15,15 @@
 </head>
 
 <body>
+	Demo: click along the path to add/remove "milestones", which affect the speed of the animation. The time between consecutive milestones is always the same, so closer milestones means slower speeds at that section.
 	<svg id="svg"></svg>
 	<script>
 	var s = Snap('#svg');
 	var circle = s.circle(-10, -10, 10);
 	Snap.load('testpath.svg', (imported) => {
 		s.append(imported);
-		var p = Snap('#path4146');
-		animateAlongPath(p, circle, 0, 2000, [10]);
+		var path = Snap('#path4146');
+		animateAlongPath(path, circle, 0, 2000, [220, 250]);
 	});
 
 	</script>
