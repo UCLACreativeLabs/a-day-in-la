@@ -1,6 +1,6 @@
 let scene1 = new Scene();
-scene1.loadScene('assets/scene1.svg');
-scene1.loadTrans('assets/waves.svg');
+scene1.loadScene('assets/HollywoodScene.svg');
+scene1.loadTrans('assets/star.svg');
 
 var animationsList = {
   ferriswheel: {

@@ -6,7 +6,12 @@ function moveDownWaves(){ //stagger move waves down
       if (i < 0){
         clearInterval(lol);
         i=0;
-        setTimeout(function(){document.getElementById('transition').style.display = "none";}, 1000);
+        transitionTo(nextScene);
+        setTimeout(function(){document.getElementById('transition').style.display = "none"; 
+          let curTrans = document.getElementById('transition');
+          document.body.removeChild(curTrans);
+          scene1.loadTrans(nextTrans); 
+        }, 1000);
         return;
       }
       move(waves[i], "down");
@@ -45,15 +50,15 @@ var waves = document.getElementsByClassName("wave");
   }
 
 function move(object, dir){
-  var pre = -100; var final = 200; //pre bob, final pos.
+  var pre = -60; var final = 200; //pre bob, final pos.
   if (dir == "up"){
-    pre = 0;
-    final = 0;
+    pre = -40;
+    final = -40;
   }
 
-  object.style.transform = "translateY(" + pre + "px)";
+  object.style.transform = "translateY(" + pre + "vh)";
   setTimeout(function(){
     object.classList.add('wg');
     object.style.transform = "translateY(" + final + "vh)";
-  }, 500);
+  }, 700);
 }

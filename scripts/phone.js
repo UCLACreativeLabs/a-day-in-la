@@ -6,19 +6,64 @@ var HB = phoneCont.getElementById('Hollywood_2_');
 var CF = phoneCont.getElementById('Cafe_2_');
 var BAR = phoneCont.getElementById('Bar_2_');
 
+var nextTrans = 'assets/coffee trans.svg';
+var nextScene = 'assets/cafe.svg';
+var curScene = HB;
+
 phoneCont.addEventListener('click', expandPhone);
 
-function clickEvent(e){
+function clickEventCF(e){
 	e.stopPropagation();
 	shrinkPhone();
-	moveUpWaves();
+	nextTrans = 'assets/coffee trans.svg';
+	nextScene = 'assets/cafe.svg';
+	if (curScene == SM)
+		moveUpWaves();
+	else if (curScene == HB){
+		shrinkStar();
+		setTimeout(function(){transitionTo('assets/cafe.svg'); expandStar();}, 500);
+	}
+}
+
+function clickEventHB(e){
+	console.log('clicked hb');
+	e.stopPropagation();
+	shrinkPhone();
+	nextTrans = 'assets/star.svg';
+	nextScene = 'assets/HollywoodScene.svg';
+	let star = Snap("#star");
+	star.attr({transform: "s 12 12"});
+	scene1.scene.attr({mask: star}); 
+	if (curScene == SM)
+		moveUpWaves();
+	else if (curScene == HB)
+		return;
+}
+
+function clickEventSM(e){
+	e.stopPropagation();
+	shrinkPhone();
+	nextTrans = 'assets/waves.svg';
+	nextScene = 'assets/HollywoodScene.svg';
+	
+}
+
+function transitionTo(scenePath){ //doesnt handle trans svg, handled in animation func
+	console.log(scenePath);
+	let cont = scene1.scene.node;
+		let curScene = cont.getElementsByTagName('svg')[0]; //the only svg element in #scene should be the current svg
+		let curTrans = document.getElementById('transition');
+		console.log(curScene);
+		cont.removeChild(curScene);
+		scene1.loadScene(scenePath);
 }
 
 function shrinkPhone(){
 	phoneCont.classList.remove('expanded');
 	phoneCont.classList.add('shrunk');
 	main.removeEventListener('click', shrinkPhone);
-	SM.removeEventListener('click', clickEvent);
+	CF.removeEventListener('click', clickEventCF);
+	HB.removeEventListener('click', clickEventHB);
 }
 
 function expandPhone(){
@@ -26,30 +71,14 @@ function expandPhone(){
 	phoneCont.classList.remove('shrunk');
 	main.addEventListener('click', shrinkPhone);
 
-	SM.addEventListener('click', clickEvent);
-	SM.addEventListener('click', );
+	CF.addEventListener('click', clickEventCF);
 
 	// HB.addEventListener('click', function(e){
 	// 	loadNext('assets/scene1.svg');
 	// 	e.stopPropagation();
 	// 	}
 	// , true);
-
-	CF.addEventListener('click', function(e){
-		e.stopPropagation(); 
-		shrinkPhone();
-		
-
-			//call only after moveUpWaves() is done
-		// let cont = scene1.scene.node;
-		// let curScene = cont.getElementsByTagName('svg')[0]; //the only svg element in #scene should be the current svg
-		// let curTrans = document.getElementById('transition');
-		// console.log(curScene);
-		// cont.removeChild(curScene);
-		// document.body.removeChild(curTrans);
-		// scene1.loadScene('assets/scene1.svg');
-		// scene1.loadTrans('assets/waves.svg'); 
-	});
+	HB.addEventListener('click', clickEventHB);
 
 
 	// BAR.addEventListener('click', function(e){
