@@ -21,10 +21,8 @@
 	var circle = s.circle(-10, -10, 10);
 	Snap.load('testpath.svg', (imported) => {
 		s.append(imported);
-		var p = Snap('#path4146'),
-			milestones = [];
-
-		animateAlongPath(p, circle, 0, 500, []);
+		var p = Snap('#path4146');
+		animateAlongPath(p, circle, 0, 500);
 	});
 
 	</script>

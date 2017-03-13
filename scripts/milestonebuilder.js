@@ -1,7 +1,9 @@
 var oldAnimateAlongPathFn = animateAlongPath;
 animateAlongPath = function(path, el, start, duration, milestones, easing, callback) {
 	var anim = null,
-		args = arguments;
+		args = [...arguments],
+		milestones = milestones || [];
+	args[4] = milestones;
 
 	function reanimate() {
 		anim && anim.stop();
