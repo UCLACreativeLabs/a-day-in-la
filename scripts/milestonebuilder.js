@@ -31,9 +31,10 @@ animateAlongPath = function(path, el, start, duration, milestones, easing, callb
 
 		closest = Snap.closestPoint(path, matinv.x(x,y), matinv.y(x,y));
 		if (closest.distance < 5) {
-			milestones.push(closest.length);
+			var len = Math.round(closest.length); // round to nearest pixel
+			milestones.push(len);
 			milestones.sort((a,b) => a-b);
-			createMilestoneNode(path, closest.length, removeMilestone.bind(closest.length));
+			createMilestoneNode(path, closest.length, removeMilestone.bind(len));
 			reanimate();
 		}
 	});
