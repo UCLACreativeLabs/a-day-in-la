@@ -17,6 +17,33 @@ function Scene() {
     Snap.load(path, function ( loadedFragment ) {
       this.scene.append( loadedFragment );
 
+      // cursor init
+      let loadedScene = Snap(this.scene.select('svg'));
+      let cursor = loadedScene.circle(150,150,8);
+      cursor.addClass("cursor");
+      cursor.attr({
+        fill: "#ddd",
+        stroke: "#ddd",
+        strokeWidth: 4,
+        opacity: 0.8
+      });
+
+      function animateExpand() {
+        cursor.animate({r: 13},
+          800,
+          animateShrink
+        );
+      }
+
+      function animateShrink() {
+        cursor.animate({r: 8},
+          800,
+          animateExpand
+        )
+      }
+
+      animateExpand();
+
       let bg = svg.getElementById('back');
       let mg = svg.getElementById('mid');
       let fg = svg.getElementById('front');
@@ -33,7 +60,30 @@ function Scene() {
           newX *= PARALLAX_FACTOR;
           newY *= PARALLAX_FACTOR;
         })
+
+        console.log(e);
+
+        // move cursor
+        cursor.attr({
+          cx: e.clientX,
+          cy: e.clientY
+        });
+
       });
+
+      window.addEventListener('mousedown', function() {
+        cursor.animate({
+          opacity: 0,
+            r: 20
+        }, 800, function() {
+          cursor.attr({
+            opacity: 0.8,
+              r: 10
+          })
+        });
+      });
+
+
     }.bind(this));
   }
 
