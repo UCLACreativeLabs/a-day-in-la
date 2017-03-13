@@ -13,7 +13,7 @@ function Scene() {
   svg.style.height = HEIGHT + 'px';
   svg.style.transformOrigin = '50% 50%';
 
-  this.loadScene = function(path) {
+  this.loadScene = function(path, parallax) {
     Snap.load(path, function ( loadedFragment ) {
       this.scene.append( loadedFragment );
 
@@ -24,16 +24,14 @@ function Scene() {
       let body = document.querySelector('body');
       body.insertBefore(cursor, body.firstChild);
 
-      let size = 21;
-      let step = 0.04;
+      let step = 0.001;
+      let scale = 1.0;
       let pulse = setInterval(function() {
-        if ((size <= 20 && step < 0) || (size >= 30 && step > 0)) {
+        if ((scale <= 1.0 && step < 0) || (scale >= 1.4 && step > 0)) {
           step *= -1;
         }
-        size += step;
-        cursor.style.width = size + 'px';
-        cursor.style.height = size + 'px';
-
+        scale += step;
+        cursor.style.transform = 'scale(' + scale + ')';
       }, 2)
 
       let bg = svg.getElementById('back');
@@ -41,55 +39,53 @@ function Scene() {
       let fg = svg.getElementById('front');
 
       window.addEventListener('mousemove', function(e) {
-        let dx = e.pageX - MID.x;
-        let dy = e.pageY - MID.y;
+        if (parallax) {
+          let dx = e.pageX - MID.x;
+          let dy = e.pageY - MID.y;
 
-        let newX = -1 * Math.min((WIDTH / 10) * (dx / MID.x) * PAD, WIDTH/10);
-        let newY = 0 * Math.min((HEIGHT / 20) * (dy / MID.y) * PAD, HEIGHT/20);
+          let newX = -1 * Math.min((WIDTH / 10) * (dx / MID.x) * PAD, WIDTH/10);
+          let newY = 0 * Math.min((HEIGHT / 20) * (dy / MID.y) * PAD, HEIGHT/20);
 
-        [fg, mg, bg].forEach(function(layer) {
-          layer.style.transform = `matrix(${SCALE}, 0, 0, ${SCALE}, ${newX}, ${newY})`;
-          newX *= PARALLAX_FACTOR;
-          newY *= PARALLAX_FACTOR;
-        })
-
+          [fg, mg, bg].forEach(function(layer) {
+            layer.style.transform = `matrix(${SCALE}, 0, 0, ${SCALE}, ${newX}, ${newY})`;
+            newX *= PARALLAX_FACTOR;
+            newY *= PARALLAX_FACTOR;
+          })
+        }
 
 
         // move cursor
         cursor.style.left = e.clientX - 10 + 'px';
         cursor.style.top = e.clientY - 10 + 'px';
+        cursor.style.display = 'block';
       });
 
       window.addEventListener('mousedown', function() {
         clearInterval(pulse);
         let count = 0;
-        let currSize = size;
+        let currScale = scale;
         let opacity = 1.0;
         let vanish = setInterval(function() {
           if (count >= 400) {
-            cursor.style.width = size + 'px';
-            cursor.style.height = size + 'px';
+            cursor.style.transform = `scale(${scale})`;
             cursor.style.opacity = 1.0;
 
             pulse = setInterval(function() {
-              if ((size <= 20 && step < 0) || (size >= 30 && step > 0)) {
+              if ((scale <= 1.0 && step < 0) || (scale >= 1.4 && step > 0)) {
                 step *= -1;
               }
-              size += step;
-              cursor.style.width = size + 'px';
-              cursor.style.height = size + 'px';
-
+              scale += step;
+              cursor.style.transform = 'scale(' + scale + ')';
             }, 2);
 
             clearInterval(vanish);
             return;
           }
-          currSize += 20/200;
+          currScale += 0.5/200;
 
           opacity -= 1/200;
 
-          cursor.style.width = currSize + 'px';
-          cursor.style.height = currSize + 'px';
+          cursor.style.transform = `scale(${currScale})`;
           cursor.style.opacity = opacity;
 
           count++;

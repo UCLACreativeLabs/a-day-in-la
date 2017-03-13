@@ -23,6 +23,7 @@ body {
 .cursor {
   width: 20px;
   height: 20px;
+  display: none;
   position: absolute;
   border-radius: 20px;
   border-color: #ddd;
@@ -31,6 +32,7 @@ body {
   background: #ddd;
   opacity: 0.8;
   z-index: 999;
+  transform-origin: 50% 50%;
 }
 
 svg * {
