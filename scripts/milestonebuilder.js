@@ -17,6 +17,13 @@ animateAlongPath = function(path, el, start, duration, milestones, easing, callb
 		console.log(milestones);
 	}
 
+	function removeMilestone(length) {
+		milestones.splice(milestones.indexOf(length), 1);
+		reanimate();
+	}
+
+	milestones.forEach(len => createMilestoneNode(path, len, removeMilestone.bind(len)));
+
 	$("#svg").click(function (e) {
 		var matinv = path.transform().globalMatrix.invert(),
 			x = e.offsetX,
@@ -24,26 +31,25 @@ animateAlongPath = function(path, el, start, duration, milestones, easing, callb
 
 		closest = Snap.closestPoint(path, matinv.x(x,y), matinv.y(x,y));
 		if (closest.distance < 5) {
-			createMilestone(path, closest.length, milestones, reanimate);
+			milestones.push(closest.length);
+			milestones.sort((a,b) => a-b);
+			createMilestoneNode(path, closest.length, removeMilestone.bind(closest.length));
+			reanimate();
 		}
 	});
 
 	reanimate();
 }
 
-function createMilestone(path, length, milestones, reanimateFn) {
+function createMilestoneNode(path, length, removeFn) {
 	var pt = path.getPointAtLength(length),
 		elem = path.parent().circle(pt.x, pt.y, 5);
 
-	milestones.push(length);
-	milestones.sort((a,b) => a-b);
 	elem.insertAfter(path);
 	elem.click((e) => {
-		milestones.splice(milestones.indexOf(length), 1);
 		elem.remove();
 		e.preventDefault();
 		e.stopPropagation();
-		reanimateFn();
+		removeFn();
 	});
-	reanimateFn();
 }
