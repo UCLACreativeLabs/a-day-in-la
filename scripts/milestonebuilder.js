@@ -9,6 +9,7 @@ animateAlongPath = function(path, el, start, duration, milestones, easing, callb
 		anim && anim.stop();
 		el.transform(''); // initial transformation should be 0
 		anim = oldAnimateAlongPathFn(...args);
+		console.log(milestones);
 	}
 
 	$("#svg").click(function (e) {
