@@ -47,6 +47,11 @@ function createMilestoneNode(path, length, removeFn) {
 		elem = path.parent().circle(pt.x, pt.y, 5);
 
 	elem.insertAfter(path);
+	elem.attr('fill', 'green');
+	elem.hover(
+		(e) => elem.attr('fill', 'red'),
+		(e) => elem.attr('fill', 'green')
+	);
 	elem.click((e) => {
 		elem.remove();
 		e.preventDefault();
