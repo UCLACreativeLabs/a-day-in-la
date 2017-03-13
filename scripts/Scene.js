@@ -17,32 +17,24 @@ function Scene() {
     Snap.load(path, function ( loadedFragment ) {
       this.scene.append( loadedFragment );
 
-      // cursor init
-      let loadedScene = Snap(this.scene.select('svg'));
-      let cursor = loadedScene.circle(150,150,8);
-      cursor.addClass("cursor");
-      cursor.attr({
-        fill: "#ddd",
-        stroke: "#ddd",
-        strokeWidth: 4,
-        opacity: 0.8
-      });
+      let cursor = document.createElement('div');
+      cursor.classList.add('cursor');
 
-      function animateExpand() {
-        cursor.animate({r: 13},
-          800,
-          animateShrink
-        );
-      }
 
-      function animateShrink() {
-        cursor.animate({r: 8},
-          800,
-          animateExpand
-        )
-      }
+      let body = document.querySelector('body');
+      body.insertBefore(cursor, body.firstChild);
 
-      animateExpand();
+      let size = 21;
+      let step = 0.04;
+      let pulse = setInterval(function() {
+        if ((size <= 20 && step < 0) || (size >= 30 && step > 0)) {
+          step *= -1;
+        }
+        size += step;
+        cursor.style.width = size + 'px';
+        cursor.style.height = size + 'px';
+
+      }, 2)
 
       let bg = svg.getElementById('back');
       let mg = svg.getElementById('mid');
@@ -61,26 +53,47 @@ function Scene() {
           newY *= PARALLAX_FACTOR;
         })
 
-        console.log(e);
+
 
         // move cursor
-        cursor.attr({
-          cx: e.clientX,
-          cy: e.clientY
-        });
-
+        cursor.style.left = e.clientX - 10 + 'px';
+        cursor.style.top = e.clientY - 10 + 'px';
       });
 
       window.addEventListener('mousedown', function() {
-        cursor.animate({
-          opacity: 0,
-            r: 20
-        }, 800, function() {
-          cursor.attr({
-            opacity: 0.8,
-              r: 10
-          })
-        });
+        clearInterval(pulse);
+        let count = 0;
+        let currSize = size;
+        let opacity = 1.0;
+        let vanish = setInterval(function() {
+          if (count >= 400) {
+            cursor.style.width = size + 'px';
+            cursor.style.height = size + 'px';
+            cursor.style.opacity = 1.0;
+
+            pulse = setInterval(function() {
+              if ((size <= 20 && step < 0) || (size >= 30 && step > 0)) {
+                step *= -1;
+              }
+              size += step;
+              cursor.style.width = size + 'px';
+              cursor.style.height = size + 'px';
+
+            }, 2);
+
+            clearInterval(vanish);
+            return;
+          }
+          currSize += 20/200;
+
+          opacity -= 1/200;
+
+          cursor.style.width = currSize + 'px';
+          cursor.style.height = currSize + 'px';
+          cursor.style.opacity = opacity;
+
+          count++;
+        }, 1)
       });
 
 

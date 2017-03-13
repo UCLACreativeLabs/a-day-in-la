@@ -15,11 +15,21 @@ body {
   }
 }
 
-#scene {
+body {
+
   cursor: none;
 }
 
 .cursor {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  border-radius: 20px;
+  border-color: #ddd;
+  border-width: 0px;
+  border-style: solid;
+  background: #ddd;
+  opacity: 0.8;
   z-index: 999;
 }
 
