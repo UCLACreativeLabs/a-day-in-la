@@ -5,6 +5,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg.js"></script>
 	<script src="scripts/animatealongpath.js"></script>
+	<script src="scripts/milestonebuilder.js"></script>
 	<style type="text/css">
 	svg {
 		width: 300px;
@@ -21,51 +22,9 @@
 	Snap.load('testpath.svg', (imported) => {
 		s.append(imported);
 		var p = Snap('#path4146'),
-			milestones = [],
-			anim = null;
+			milestones = [];
 
-		testInterpolate = createTravelLengthInterpolator([1,10,50]);
-		for (var i = 0; i < 1; i+=0.1) {
-			console.log(testInterpolate(i));
-		}
-
-		function reanimate() {
-			anim && anim.stop();
-			circle.transform(''); // initial transformation should be 0
-			anim = animateAlongPath(p, circle, 0, 500, milestones);
-		}
-
-		function createMilestone(path, length) {
-			var pt = path.getPointAtLength(length),
-				elem = path.parent().circle(pt.x, pt.y, 5);
-
-			milestones.push(length);
-			milestones.sort((a,b) => a-b);
-			elem.insertAfter(path);
-			elem.click((e) => {
-				milestones.splice(milestones.indexOf(length), 1);
-				elem.remove();
-				e.preventDefault();
-				e.stopPropagation();
-				reanimate();
-			});
-			reanimate();
-		}
-
-		$("#svg").click(function (e) {
-			var matinv = p.transform().globalMatrix.invert(),
-				x = e.offsetX,
-				y = e.offsetY;
-
-			closest = Snap.closestPoint(p, matinv.x(x,y), matinv.y(x,y));
-			if (closest.distance < 5) {
-				createMilestone(p, closest.length);
-			}
-
-			console.log(closest);
-		});
-
-		reanimate();
+		animateAlongPath(p, circle, 0, 500, []);
 	});
 
 	</script>
