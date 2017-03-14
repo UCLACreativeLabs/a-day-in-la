@@ -32,7 +32,6 @@ function initCursor() {
       if (count >= 400) {
         cursor.style.transform = `scale(${scale})`;
         cursor.style.opacity = 1.0;
-        clearInterval(pulse);
 
         pulse = setInterval(function() {
           if ((scale <= 1.0 && step < 0) || (scale >= 1.4 && step > 0)) {
