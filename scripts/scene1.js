@@ -1,5 +1,6 @@
 let scene1 = new Scene();
-scene1.loadScene('assets/scene1.svg', true);
+scene1.loadScene('assets/lyftScene.svg', false);
+scene1.loadTrans('assets/car.svg');
 
 var animationsList = {
   ferriswheel: {

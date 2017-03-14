@@ -30,11 +30,89 @@ body {
   border-width: 0px;
   border-style: solid;
   background: #ddd;
-  opacity: 0.8;
+  opacity: 0.6;
+  pointer-events: none;
   z-index: 999;
   transform-origin: 50% 50%;
 }
 
 svg * {
 	@include prefix(transform-origin, center);
+}
+
+.phoneCont{
+  position: fixed;
+  z-index: 900;
+  transition: all .25s ease-out;
+}
+
+.shrunk{
+  height: 20vh;
+  bottom: 5vh;
+  left: 5vh;
+  &:hover {
+    height: 22vh;
+  }
+}
+
+.expanded{
+  height: 100vh;
+  bottom: 50vh;
+  left: 50vw;
+  transform: translate(-50%, 50%);
+}
+
+.wave{
+  transform: translateY(200vh);
+  transition: all .5s ease-in-out;
+}
+
+#transition{
+  position: fixed;
+  display: none; //remember to enable display when transition displays, then hide it again (doesn't interfere with scene clicks)
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 102;
+  max-width: 120vw;
+  max-height: 120vh;
+}
+
+
+.rotate{
+  animation: rotate .5 infinite;
+  animation-timing-function: linear;
+  transition: all 1s;
+}
+
+@keyframes rotate{
+  0%{transform: rotate(0deg);}
+  100%{transform: rotate(360deg);}
+}
+
+.bottle{
+  transform: translateX(100vw);
+}
+
+.bottleAnim{
+  animation: bottleStagger 4s forwards;
+}
+
+@keyframes bottleStagger{
+  0%{transform: translateX(100vw);}
+  30%{transform: translateX(-10vw);}
+  50%{transform: translateX(0vw);}
+  70%{transform: translateX(-5vw);}
+  100%{transform: translateX(100vw);}
+}
+
+.drive{
+  animation: drive 2s;
+}
+
+@keyframes drive{
+  0%{transform: translateY(-50%) translateX(-250vw);}
+  30%{transform: translateY(-50%) translateX(20vw); }
+  80%{transform: translateY(-50%) translateX(-20vw);}
+  100%{transform: translateY(-50%) translateX(100vw);}
 }
