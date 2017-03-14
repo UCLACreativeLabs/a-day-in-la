@@ -107,11 +107,7 @@ function Scene() {
       if(!bg || !mg || !fg) {
         return;
       }
-<<<<<<< HEAD
       
-=======
-
->>>>>>> ba010db23a3bbc7013d622621643ff90492c98a8
       window.addEventListener('mousemove', function(e) {
         if (parallax) {
           let dx = e.pageX - MID.x;
