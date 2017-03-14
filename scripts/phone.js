@@ -179,8 +179,8 @@ function transitionTo(scenePath){ //doesnt handle trans svg, handled in animatio
 	let sceneInfo = nextSceneHash[nextScene];
 
 	scene1.loadScene(scenePath, sceneInfo.parallax);
-	loadjscssfile("/css/scenes/" + sceneInfo.name + ".css", "css");
-	loadjscssfile("/scripts/scenes/" + sceneInfo.name + ".js", "js");
+	loadjscssfile("./css/scenes/" + sceneInfo.name + ".css", "css");
+	loadjscssfile("./scripts/scenes/" + sceneInfo.name + ".js", "js");
 }
 
 function shrinkPhone(){
