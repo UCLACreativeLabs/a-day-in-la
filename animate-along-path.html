@@ -1,0 +1,32 @@
+<html>
+
+<head>
+	<script src="scripts/pathseg.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg.js"></script>
+	<script src="scripts/animatealongpath.js"></script>
+	<script src="scripts/milestonebuilder.js"></script>
+	<style type="text/css">
+	svg {
+		width: 300px;
+		height: 300px;
+	}
+	</style>
+</head>
+
+<body>
+	Demo: click along the path to add/remove "milestones", which affect the speed of the animation. The time between consecutive milestones is always the same, so closer milestones means slower speeds at that section.
+	<svg id="svg"></svg>
+	<script>
+	var s = Snap('#svg');
+	var circle = s.circle(-10, -10, 10);
+	Snap.load('testpath.svg', (imported) => {
+		s.append(imported);
+		var path = Snap('#path4146');
+		animateAlongPath(path, circle, 0, 2000, [220, 250]);
+	});
+
+	</script>
+</body>
+
+</html>
