@@ -6,11 +6,6 @@ var animationsList = {
 		trigger: "default",
 		animation: coasterAnimation
 	}
-  // ferriswheel: {
-  //   trigger: "default",
-  //   animation: ferrisAnimation,
-  // }
-
 };
 
 Snap.plugin(function (Snap, Element, Paper, glob, Fragment) {
@@ -44,15 +39,3 @@ function coasterAnimation(elem) {
 	elem.children[0].classList += "coaster";
 	coastercart.animateAlongPath(pathData, coastercart, 0, 10000, mina.linear());
 }
-//
-// //define CustomAnimations here
-// function ferrisAnimation(elem) {
-//   elem.style.transition = '10s ease all';
-//   elem.style.transform = 'rotate(360deg)';
-//   var nodes = elem.childNodes;
-//   for(var i=0; i<nodes.length; i++) {
-//       if (nodes[i].nodeName.toLowerCase() == 'g') {
-//           nodes[i].style.transform = 'rotate(-360deg)';
-//        }
-//   }
-// }

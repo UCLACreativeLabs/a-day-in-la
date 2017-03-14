@@ -86,7 +86,6 @@ function clickEventCF(e){
 }
 
 function clickEventHB(e){
-	console.log('clicked hb');
 	e.stopPropagation();
 	shrinkPhone();
 	nextTrans = 'assets/star.svg';
@@ -176,7 +175,6 @@ function transitionTo(scenePath){ //doesnt handle trans svg, handled in animatio
 	let cont = scene1.scene.node;
 	let curScene = cont.getElementsByTagName('svg')[0]; //the only svg element in #scene should be the current svg
 	let curTrans = document.getElementById('transition');
-	console.log(curScene);
 	cont.removeChild(curScene);
 	let sceneInfo = nextSceneHash[nextScene];
 
