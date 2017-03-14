@@ -1,20 +1,41 @@
+function throttle(func, wait, options) {
+  var context, args, result;
+  var timeout = null;
+  var previous = 0;
+  if (!options) options = {};
+  var later = function() {
+    previous = options.leading === false ? 0 : Date.now();
+    timeout = null;
+    result = func.apply(context, args);
+    if (!timeout) context = args = null;
+  };
+  return function() {
+    var now = Date.now();
+    if (!previous && options.leading === false) previous = now;
+    var remaining = wait - (now - previous);
+    context = this;
+    args = arguments;
+    if (remaining <= 0 || remaining > wait) {
+      if (timeout) {
+        clearTimeout(timeout);
+        timeout = null;
+      }
+      previous = now;
+      result = func.apply(context, args);
+      if (!timeout) context = args = null;
+    } else if (!timeout && options.trailing !== false) {
+      timeout = setTimeout(later, remaining);
+    }
+    return result;
+  };
+};
+
 function initCursor() {
   let cursor = document.createElement('div');
   cursor.classList.add('cursor');
 
-
   let body = document.querySelector('body');
   body.insertBefore(cursor, body.firstChild);
-
-  let step = 0.001;
-  let scale = 1.0;
-  var pulse = setInterval(function() {
-    if ((scale <= 1.0 && step < 0) || (scale >= 1.4 && step > 0)) {
-      step *= -1;
-    }
-    scale += step;
-    cursor.style.transform = 'scale(' + scale + ')';
-  }, 2)
 
   window.addEventListener('mousemove', function(e) {
     // move cursor
@@ -23,37 +44,34 @@ function initCursor() {
     cursor.style.display = 'block';
   })
 
-  window.addEventListener('mousedown', function(e) {
-    clearInterval(pulse);
+  let handleClick = throttle(function(e) {
+    cursor.style.animationName = "none";
     let count = 0;
-    let currScale = scale;
-    let opacity = 1.0;
+    let currScale = 1.0;
+    let opacity = 0.6;
     let vanish = setInterval(function() {
       if (count >= 400) {
-        cursor.style.transform = `scale(${scale})`;
-        cursor.style.opacity = 1.0;
+        cursor.style.transform = 'scale(1.0)';
+        cursor.style.opacity = 0.6;
 
-        pulse = setInterval(function() {
-          if ((scale <= 1.0 && step < 0) || (scale >= 1.4 && step > 0)) {
-            step *= -1;
-          }
-          scale += step;
-          cursor.style.transform = 'scale(' + scale + ')';
-        }, 2);
+        cursor.style.animationName = "cursor";
 
         clearInterval(vanish);
         return;
       }
       currScale += 0.5/200;
 
-      opacity -= 1/200;
+      opacity -= 0.6/200;
 
       cursor.style.transform = `scale(${currScale})`;
       cursor.style.opacity = opacity;
 
       count++;
     }, 1)
-  });
+
+  }, 1200);
+
+  window.addEventListener('mousedown', handleClick);
 
 }
 
