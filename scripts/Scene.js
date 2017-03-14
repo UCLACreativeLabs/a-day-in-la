@@ -8,7 +8,7 @@ function initCursor() {
 
   let step = 0.001;
   let scale = 1.0;
-  let pulse = setInterval(function() {
+  var pulse = setInterval(function() {
     if ((scale <= 1.0 && step < 0) || (scale >= 1.4 && step > 0)) {
       step *= -1;
     }
@@ -32,6 +32,7 @@ function initCursor() {
       if (count >= 400) {
         cursor.style.transform = `scale(${scale})`;
         cursor.style.opacity = 1.0;
+        clearInterval(pulse);
 
         pulse = setInterval(function() {
           if ((scale <= 1.0 && step < 0) || (scale >= 1.4 && step > 0)) {
