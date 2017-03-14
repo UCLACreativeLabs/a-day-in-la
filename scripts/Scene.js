@@ -23,6 +23,8 @@ function Scene() {
     Snap.load(path, function ( loadedFragment ) {
       this.scene.append( loadedFragment );
 
+      if (curScene != SM)
+        return;
       let bg = svg.getElementById('back');
       let mg = svg.getElementById('mid');
       let fg = svg.getElementById('front');

@@ -106,13 +106,43 @@ svg * {
   max-height: 120vh; }
 
 .rotate {
-  animation: rotate 5s infinite;
-  animation-timing-function: linear; }
+  animation: rotate .5 infinite;
+  animation-timing-function: linear;
+  transition: all 1s; }
 
 @keyframes rotate {
   0% {
-    transform: rotate(180deg) translate(100vw, 0); }
+    transform: rotate(0deg); }
   100% {
-    transform: rotate(-180deg) translate(-10vw, 0); } }
+    transform: rotate(360deg); } }
+.bottle {
+  transform: translateX(100vw); }
+
+.bottleAnim {
+  animation: bottleStagger 4s forwards; }
+
+@keyframes bottleStagger {
+  0% {
+    transform: translateX(100vw); }
+  30% {
+    transform: translateX(-10vw); }
+  50% {
+    transform: translateX(0vw); }
+  70% {
+    transform: translateX(-5vw); }
+  100% {
+    transform: translateX(100vw); } }
+.drive {
+  animation: drive 2s; }
+
+@keyframes drive {
+  0% {
+    transform: translateY(-50%) translateX(-250vw); }
+  30% {
+    transform: translateY(-50%) translateX(20vw); }
+  80% {
+    transform: translateY(-50%) translateX(-20vw); }
+  100% {
+    transform: translateY(-50%) translateX(100vw); } }
 
 /*# sourceMappingURL=main.css.map */
