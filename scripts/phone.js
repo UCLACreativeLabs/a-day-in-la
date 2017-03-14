@@ -9,7 +9,7 @@ var BAR = phoneCont.getElementById('Bar_2_');
 var nextSceneHash = {
 	'assets/cafe.svg' : {
 		"name" : "",
-		"parallax" : false
+		"parallax" : true
 	},
 	'assets/HollywoodScene.svg' : {
 		"name" : "",
