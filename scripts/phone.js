@@ -1,5 +1,6 @@
 var phoneCont = document.getElementsByClassName('phoneCont')[0];
 var main = document.getElementById("scene");
+var music = document.getElementById("music");
 
 var SM = phoneCont.getElementById('SantaMonica_1_');
 var HB = phoneCont.getElementById('Hollywood_2_');
@@ -62,6 +63,7 @@ function clickEventCF(e){
 	shrinkPhone();
 	nextTrans = 'assets/coffee trans.svg';
 	nextScene = 'assets/cafe.svg';
+	music.src = 'assets/cafemusic.mp3';
 	if (curScene == SM)
 		moveUpWaves();
 	else if (curScene == HB){
@@ -90,6 +92,7 @@ function clickEventHB(e){
 	shrinkPhone();
 	nextTrans = 'assets/star.svg';
 	nextScene = 'assets/HollywoodScene.svg';
+	music.src = 'assets/hollywoodmusic.mp3';
 	if (curScene == SM)
 		moveUpWaves();
 	else if (curScene == HB)
@@ -114,6 +117,7 @@ function clickEventSM(e){
 	shrinkPhone();
 	nextTrans = 'assets/waves.svg';
 	nextScene = 'assets/SantaMonica.svg';
+	music.src = 'assets/santamonicamusic.mp3'
 	if (curScene == SM)
 		return;
 	else if (curScene == HB){
@@ -143,6 +147,7 @@ function clickEventBAR(e){
 	shrinkPhone();
 	nextTrans = 'assets/bottles.svg';
 	nextScene = 'assets/bar.svg';
+	music.src = 'assets/barmusic.mp3';
 	if (curScene == SM){
 		moveUpWaves();
 	}
