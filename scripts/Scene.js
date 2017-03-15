@@ -96,18 +96,29 @@ function Scene() {
     }.bind(this));
   }
 
-  this.loadScene = function(path, parallax) {
+  this.loadScene = function(path, parallax, firstScene = false) {
     Snap.load(path, function ( loadedFragment ) {
       this.scene.append( loadedFragment );
+
+      if (firstScene) {
+        let startScene = document.getElementById('start-scene');
+
+        document.getElementById('Start').addEventListener('click', function() {
+          startScene.parentNode.removeChild(startScene);
+          scene1.loadScene('assets/lyftScene.svg', false);
+          scene1.loadTrans('assets/car.svg');
+          document.getElementById('phoneContainer').style.display = "block";
+        })
+      }
 
       let bg = svg.getElementById('back');
       let mg = svg.getElementById('mid');
       let fg = svg.getElementById('front');
 
-      if(!bg || !mg || !fg) {
+      if (!bg || !mg || !fg) {
         return;
       }
-      
+
       window.addEventListener('mousemove', function(e) {
         if (parallax) {
           let dx = e.pageX - MID.x;
