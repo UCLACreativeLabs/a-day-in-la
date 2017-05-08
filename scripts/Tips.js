@@ -25,7 +25,18 @@ function initTips() {
 	var opacity = 0;
 	window.addEventListener('keypress', function(e) {
 		opacity = 1 - opacity;
-		document.getElementsByClassName('tipsContainerParent')[0].style.opacity = opacity;
-
+		if (opacity == 1) {
+			document.getElementsByClassName('tipsContainerParent')[0].style.display = "flex";
+			window.setTimeout(function() {
+				document.getElementsByClassName('tipsContainerParent')[0].style.opacity = opacity;
+			}, 100);
+		}
+		else {
+			document.getElementsByClassName('tipsContainerParent')[0].style.opacity = opacity;
+			window.setTimeout(function() {
+				document.getElementsByClassName('tipsContainerParent')[0].style.display = "none";
+			}, 500);
+		}
+		
 	})
 }
