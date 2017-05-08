@@ -1,0 +1,64 @@
+.tipsContainerParent {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: 0.5s ease all;
+}
+
+#tipsContainer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.tip {
+	width: 250px;
+	flex: 1 1 auto;
+	background: rgba(256, 256, 256, 1);
+	border-radius: 4px;
+	overflow: hidden;
+	margin: 10px;
+}
+
+.tip img {
+	width: 100%;
+}
+
+.tipContent {
+	padding: 40px;
+	text-align: center;
+}
+
+.tip h2, .tip p, .tip a {
+	font-family: Avenir;
+}
+
+.tip h2 {
+	font-size: 1.5em;
+	margin-bottom: 10px;
+}
+
+.tip p {
+	font-size: 14px;
+	line-height: 1.5;
+	margin-bottom: 20px;
+	font-style: normal;
+}
+
+.tip a {
+	text-decoration: none;
+	background: #187dec;
+	padding: 5px 10px;
+	color: #fff;
+	letter-spacing: 0.13em;
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: bold;
+}

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/scenes/Lyft.css">
+    <link rel="stylesheet" href="css/tips.css">
     <title>A Day in LA</title>
   </head>
   <body>
@@ -1201,6 +1202,30 @@
 </svg>
 
     <svg class="main" id="scene"></svg>
+
+    <div class="tipsContainerParent">
+      <div id="tipsContainer">
+        <div class="tip">
+          <img src="images/default.jpg">
+          <div class="tipContent">
+            <h2>Venice Beach</h2>
+            <p>Never a dull moment</p>
+            <a href="#">Explore</a>
+          </div>
+        </div>
+
+        <div class="tip">
+          <img src="images/default.jpg">
+          <div class="tipContent">
+            <h2>Santa Monica</h2>
+            <p>World Famous</p>
+            <a href="#">Explore</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <script src="bower_components/Snap.svg/dist/snap.svg.js"></script>
     <script src="scripts/phone.js"></script>
     <script src="scripts/waves.js"></script>
@@ -1214,6 +1239,7 @@
     <script src="scripts/car.js"></script>
     <script>
       initCursor();
+      initTips();
     </script>
   </body>
 </html>
