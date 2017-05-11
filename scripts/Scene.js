@@ -101,6 +101,9 @@ function Scene() {
       this.scene.append( loadedFragment );
 
       if (firstScene) {
+        //call this function in eventHandler with correct argument
+        angular.element(document.getElementById('tipsController')).scope().test('corgi');
+
         let startScene = document.getElementById('start-scene');
 
         document.getElementById('Start').addEventListener('click', function() {
@@ -134,7 +137,6 @@ function Scene() {
           })
         }
       });
-
 
     }.bind(this));
   }
